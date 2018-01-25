@@ -34,7 +34,10 @@ if(process.argv.length <= 2){
         process.exit(code);
     });
 }else{
-    var pattern = process.argv[2];
+    var inputPath = process.argv[2];
+    var pattern = path.basename(inputPath);
+    var cwd = path.dirname(inputPath);
+    process.chdir(cwd);
     var dirs = fs.readdirSync(".").filter(f => {
         try{
             return fs.statSync(path.join(".", f)).isDirectory() &&
